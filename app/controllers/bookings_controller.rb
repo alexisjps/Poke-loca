@@ -19,12 +19,12 @@ class BookingsController < ApplicationController
     @pokemon = Pokemon.find(params[:pokemon_id])
     @booking = Booking.new(strong_params)
     @booking.user_id = current_user.id
-
+    
     @booking.pokemon_id = @pokemon.id
-
+    
     @booking.total_price = calculate_price(@pokemon, @booking)
     if @booking.save!
-      render :new
+      redirect_to pokemon_path(@pokemon)
     else
       render :new
     end
